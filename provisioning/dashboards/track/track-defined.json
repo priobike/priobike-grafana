@@ -1,0 +1,1001 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 12,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "xcy4dMw4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 5
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "green",
+                  "value": 25
+                },
+                {
+                  "color": "dark-green",
+                  "value": 30
+                },
+                {
+                  "color": "#8AB8FF",
+                  "value": 40
+                }
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {
+                "id": "byName",
+                "options": "speed"
+              },
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {
+                    "mode": "thresholds"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "gridPos": {
+          "h": 16,
+          "w": 13,
+          "x": 0,
+          "y": 0
+        },
+        "id": 7,
+        "options": {
+          "basemap": {
+            "config": {},
+            "name": "Layer 0",
+            "type": "default"
+          },
+          "controls": {
+            "mouseWheelZoom": true,
+            "showAttribution": true,
+            "showDebug": false,
+            "showMeasure": false,
+            "showScale": false,
+            "showZoom": true
+          },
+          "layers": [
+            {
+              "config": {
+                "arrow": 0,
+                "style": {
+                  "color": {
+                    "field": "speed_kmh",
+                    "fixed": "dark-green"
+                  },
+                  "lineWidth": 2,
+                  "opacity": 1,
+                  "rotation": {
+                    "fixed": 0,
+                    "max": 360,
+                    "min": -360,
+                    "mode": "mod"
+                  },
+                  "size": {
+                    "fixed": 5,
+                    "max": 15,
+                    "min": 2
+                  },
+                  "symbol": {
+                    "fixed": "img/icons/marker/circle.svg",
+                    "mode": "fixed"
+                  },
+                  "text": {
+                    "fixed": "",
+                    "mode": "field"
+                  },
+                  "textConfig": {
+                    "fontSize": 12,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "textAlign": "center",
+                    "textBaseline": "middle"
+                  }
+                }
+              },
+              "location": {
+                "latitude": "lon",
+                "longitude": "lat",
+                "mode": "auto"
+              },
+              "name": "Layer 1",
+              "tooltip": true,
+              "type": "route"
+            }
+          ],
+          "tooltip": {
+            "mode": "details"
+          },
+          "view": {
+            "allLayers": true,
+            "id": "fit",
+            "lat": 0,
+            "lon": 0,
+            "zoom": 15
+          }
+        },
+        "pluginVersion": "9.5.3",
+        "targets": [
+          {
+            "alias": "",
+            "bucketAggs": [],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "metrics": [
+              {
+                "id": "1",
+                "settings": {
+                  "limit": "500"
+                },
+                "type": "logs"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "A",
+            "timeField": "@timestamp"
+          },
+          {
+            "alias": "",
+            "bucketAggs": [],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "hide": false,
+            "metrics": [
+              {
+                "id": "1",
+                "settings": {
+                  "limit": "500"
+                },
+                "type": "logs"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "B",
+            "timeField": "@timestamp"
+          },
+          {
+            "alias": "",
+            "bucketAggs": [],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "hide": false,
+            "metrics": [
+              {
+                "id": "1",
+                "settings": {
+                  "limit": "500"
+                },
+                "type": "logs"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "C",
+            "timeField": "@timestamp"
+          }
+        ],
+        "title": "track",
+        "transformations": [
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [],
+              "replace": true,
+              "source": "data.gps.speed"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "id": "reduce",
+            "options": {
+              "labelsToFields": false,
+              "reducers": [
+                "allValues"
+              ]
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [
+                {
+                  "alias": "speed",
+                  "path": "[0]"
+                }
+              ],
+              "keepTime": false,
+              "replace": false,
+              "source": "All values"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "B"
+            },
+            "id": "extractFields",
+            "options": {
+              "keepTime": false,
+              "replace": true,
+              "source": "data.gps.timestamp"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "B"
+            },
+            "id": "reduce",
+            "options": {
+              "reducers": [
+                "allValues"
+              ]
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "B"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [
+                {
+                  "alias": "timestamp",
+                  "path": "[0]"
+                }
+              ],
+              "keepTime": false,
+              "replace": false,
+              "source": "All values"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "C"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "auto",
+              "keepTime": false,
+              "replace": true,
+              "source": "data.gps.coordinates"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "C"
+            },
+            "id": "reduce",
+            "options": {
+              "labelsToFields": false,
+              "reducers": [
+                "allValues"
+              ]
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "C"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [
+                {
+                  "alias": "lon",
+                  "path": "[0][0]"
+                },
+                {
+                  "alias": "lat",
+                  "path": "[0][1]"
+                }
+              ],
+              "keepTime": false,
+              "replace": false,
+              "source": "All values"
+            }
+          },
+          {
+            "id": "joinByField",
+            "options": {
+              "byField": "Field",
+              "mode": "outer"
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "time",
+                  "targetField": "timestamp"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "speed_kmh",
+              "binary": {
+                "left": "speed",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "3.6"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "All values 1": true,
+                "All values 2": true,
+                "All values 3": true,
+                "Field": true,
+                "speed": true
+              },
+              "indexByName": {
+                "All values 1": 1,
+                "All values 2": 4,
+                "Field": 0,
+                "speed": 3,
+                "timestamp": 2
+              },
+              "renameByName": {
+                "All values 2": "",
+                "All values 3": "",
+                "speed": "",
+                "speed_kmh": "speed"
+              }
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": -3.6
+                    }
+                  },
+                  "fieldName": "speed"
+                }
+              ],
+              "match": "any",
+              "type": "exclude"
+            }
+          }
+        ],
+        "type": "geomap"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "xcy4dMw4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "max": 50,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 5
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "green",
+                  "value": 25
+                },
+                {
+                  "color": "dark-green",
+                  "value": 30
+                },
+                {
+                  "color": "light-blue",
+                  "value": 40
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 13,
+          "y": 0
+        },
+        "id": 10,
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "9.5.3",
+        "targets": [
+          {
+            "alias": "",
+            "bucketAggs": [
+              {
+                "field": "data.metadata.userId.keyword",
+                "id": "2",
+                "settings": {
+                  "min_doc_count": "1",
+                  "order": "desc",
+                  "orderBy": "1",
+                  "size": "0"
+                },
+                "type": "terms"
+              }
+            ],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "metrics": [
+              {
+                "field": "data.gps.speed",
+                "id": "1",
+                "settings": {
+                  "script": "_value*3.6"
+                },
+                "type": "avg"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "A",
+            "timeField": "@timestamp"
+          }
+        ],
+        "title": "average speed",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "xcy4dMw4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "max": 50,
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 5
+                },
+                {
+                  "color": "yellow",
+                  "value": 10
+                },
+                {
+                  "color": "green",
+                  "value": 25
+                },
+                {
+                  "color": "dark-green",
+                  "value": 30
+                },
+                {
+                  "color": "light-blue",
+                  "value": 40
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 13,
+          "y": 8
+        },
+        "id": 8,
+        "options": {
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "9.5.3",
+        "targets": [
+          {
+            "alias": "",
+            "bucketAggs": [
+              {
+                "field": "data.metadata.userId.keyword",
+                "id": "2",
+                "settings": {
+                  "min_doc_count": "1",
+                  "order": "desc",
+                  "orderBy": "1",
+                  "size": "0"
+                },
+                "type": "terms"
+              }
+            ],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "metrics": [
+              {
+                "field": "data.gps.speed",
+                "id": "1",
+                "settings": {
+                  "script": "_value*3.6"
+                },
+                "type": "max"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "A",
+            "timeField": "@timestamp"
+          }
+        ],
+        "title": "max speed",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "xcy4dMw4k"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "fillOpacity": 87,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineWidth": 0,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "red",
+                  "value": null
+                },
+                {
+                  "color": "orange",
+                  "value": 5
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 10
+                },
+                {
+                  "color": "green",
+                  "value": 25
+                },
+                {
+                  "color": "dark-green",
+                  "value": 30
+                },
+                {
+                  "color": "super-light-blue",
+                  "value": 40
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 16
+        },
+        "id": 9,
+        "options": {
+          "barRadius": 0,
+          "barWidth": 0.68,
+          "colorByField": "speed",
+          "fullHighlight": false,
+          "groupWidth": 0.7,
+          "legend": {
+            "calcs": [],
+            "displayMode": "table",
+            "placement": "right",
+            "showLegend": true
+          },
+          "orientation": "auto",
+          "showValue": "auto",
+          "stacking": "normal",
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          },
+          "xField": "timestamp",
+          "xTickLabelMaxLength": 0,
+          "xTickLabelRotation": 0,
+          "xTickLabelSpacing": 100
+        },
+        "pluginVersion": "9.5.3",
+        "targets": [
+          {
+            "alias": "",
+            "bucketAggs": [],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "metrics": [
+              {
+                "id": "1",
+                "settings": {
+                  "limit": "500"
+                },
+                "type": "logs"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "A",
+            "timeField": "@timestamp"
+          },
+          {
+            "alias": "",
+            "bucketAggs": [],
+            "datasource": {
+              "type": "elasticsearch",
+              "uid": "xcy4dMw4k"
+            },
+            "hide": false,
+            "metrics": [
+              {
+                "id": "1",
+                "settings": {
+                  "limit": "500"
+                },
+                "type": "logs"
+              }
+            ],
+            "query": "data.pk:$track_id",
+            "refId": "B",
+            "timeField": "@timestamp"
+          }
+        ],
+        "title": "average speed",
+        "transformations": [
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [],
+              "replace": true,
+              "source": "data.gps.speed"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "id": "reduce",
+            "options": {
+              "labelsToFields": false,
+              "reducers": [
+                "allValues"
+              ]
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "A"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [
+                {
+                  "alias": "speed",
+                  "path": "[0]"
+                }
+              ],
+              "keepTime": false,
+              "replace": false,
+              "source": "All values"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "B"
+            },
+            "id": "extractFields",
+            "options": {
+              "keepTime": false,
+              "replace": true,
+              "source": "data.gps.timestamp"
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "B"
+            },
+            "id": "reduce",
+            "options": {
+              "reducers": [
+                "allValues"
+              ]
+            }
+          },
+          {
+            "filter": {
+              "id": "byRefId",
+              "options": "B"
+            },
+            "id": "extractFields",
+            "options": {
+              "format": "json",
+              "jsonPaths": [
+                {
+                  "alias": "timestamp",
+                  "path": "[0]"
+                }
+              ],
+              "keepTime": false,
+              "replace": false,
+              "source": "All values"
+            }
+          },
+          {
+            "id": "joinByField",
+            "options": {
+              "byField": "Field",
+              "mode": "outer"
+            }
+          },
+          {
+            "id": "convertFieldType",
+            "options": {
+              "conversions": [
+                {
+                  "destinationType": "time",
+                  "targetField": "timestamp"
+                }
+              ],
+              "fields": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "speed_kmh",
+              "binary": {
+                "left": "speed",
+                "operator": "*",
+                "reducer": "sum",
+                "right": "3.6"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "All values 1": true,
+                "All values 2": true,
+                "Field": true,
+                "speed": true
+              },
+              "indexByName": {
+                "All values 1": 1,
+                "All values 2": 4,
+                "Field": 0,
+                "speed": 3,
+                "timestamp": 2
+              },
+              "renameByName": {
+                "All values 2": "",
+                "speed": "",
+                "speed_kmh": "speed"
+              }
+            }
+          },
+          {
+            "id": "filterByValue",
+            "options": {
+              "filters": [
+                {
+                  "config": {
+                    "id": "equal",
+                    "options": {
+                      "value": -3.6
+                    }
+                  },
+                  "fieldName": "speed"
+                }
+              ],
+              "match": "any",
+              "type": "exclude"
+            }
+          }
+        ],
+        "type": "barchart"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {},
+          "hide": 0,
+          "includeAll": false,
+          "label": "track id",
+          "multi": false,
+          "name": "track_id",
+          "options": [],
+          "query": "",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6M",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "track defined",
+    "uid": "d57ab064-a78b-47e7-bac8-cacce4be3a8b",
+    "version": 60,
+    "weekStart": ""
+  }
