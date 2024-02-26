@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1790,13 +1790,25 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "increase(n_app_starts{}[120s]) / 2",
-          "legendFormat": "# App Starts per 60s",
+          "expr": "current_bucket_start_counts",
+          "legendFormat": "# App Starts (live)",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "past_buckets_avg",
+          "hide": false,
+          "legendFormat": "# App Starts (past three weeks)",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "# App Starts per 60s",
+      "title": "# App Starts (past three weeks)",
       "type": "timeseries"
     },
     {
@@ -2237,6 +2249,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 19,
+  "version": 3,
   "weekStart": ""
 }
