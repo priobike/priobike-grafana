@@ -64,8 +64,8 @@
         }
       ]
     },
-    "description": "Official dashboard for Standalone Traefik",
-    "editable": false,
+    "description": "Traefik Dashboard",
+    "editable": true,
     "fiscalYearStartMonth": 0,
     "gnetId": 17346,
     "graphTooltip": 0,
