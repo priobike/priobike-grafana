@@ -1,0 +1,196 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: System status
+      folder: Critical Alerts
+      interval: 10m
+      rules:
+        - uid: f6d7b1a1-cdc1-4c5b-841f-c4a34d624e7d
+          title: MQTT Messages for Traffic Lights from SensorThings Broker
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                exemplar: false
+                expr: (increase(prediction_service_connection_observations_count_total{}[120s]) / 2) + (increase(prediction_service_cycle_time_observations_count_total{}[120s]) / 2)
+                instant: false
+                interval: ""
+                intervalMs: 60000
+                legendFormat: Phase Changes
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                settings:
+                    mode: replaceNN
+                    replaceWithValue: 0
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 4000
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: sdmbOcJnz
+          panelId: 8
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 10m
+          annotations:
+            __dashboardUid__: sdmbOcJnz
+            __panelId__: "8"
+            summary: Observation Outage
+          labels: {}
+          isPaused: false
+        - uid: d54b104b-32b5-49a3-bf68-3e4671bc44cb
+          title: Service status
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                exemplar: true
+                expr: 1 - service_is_up{} - (service_is_partially_running{} * 0.5)
+                interval: ""
+                intervalMs: 60000
+                legendFormat: '{{service}}'
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                settings:
+                    mode: replaceNN
+                    replaceWithValue: 1
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.9
+                            - 1.1
+                        type: within_range
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: sdmbOcJnz
+          panelId: 22
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 10m
+          annotations:
+            __dashboardUid__: sdmbOcJnz
+            __panelId__: "22"
+            summary: Service Outage
+          labels: {}
+          isPaused: false
