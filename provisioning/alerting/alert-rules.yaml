@@ -293,7 +293,7 @@ groups:
           data:
             - refId: A
               relativeTimeRange:
-                from: 600
+                from: 120
                 to: 0
               datasourceUid: PBFA97CFB590B2093
               model:
@@ -311,7 +311,7 @@ groups:
                 refId: A
             - refId: B
               relativeTimeRange:
-                from: 600
+                from: 120
                 to: 0
               datasourceUid: __expr__
               model:
@@ -341,7 +341,7 @@ groups:
                 type: reduce
             - refId: C
               relativeTimeRange:
-                from: 600
+                from: 120
                 to: 0
               datasourceUid: __expr__
               model:
@@ -364,7 +364,8 @@ groups:
                     type: __expr__
                     uid: __expr__
                 expression: B
-                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
                 reducer: last
                 refId: C
                 settings:
@@ -373,7 +374,7 @@ groups:
                 type: reduce
             - refId: D
               relativeTimeRange:
-                from: 600
+                from: 120
                 to: 0
               datasourceUid: __expr__
               model:
@@ -396,7 +397,8 @@ groups:
                     type: __expr__
                     uid: __expr__
                 expression: C
-                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
                 refId: D
                 type: threshold
           dashboardUid: n5bu_kv45
