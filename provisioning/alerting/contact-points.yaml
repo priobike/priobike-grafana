@@ -1,7 +1,7 @@
 apiVersion: 1
 contactPoints:
     - orgId: 1
-      name: grafana-default-email
+      name: priobike-email
       receivers:
         - uid: c44bdc73-fda1-4fba-ae56-e362977e7bd9
           type: email
