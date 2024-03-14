@@ -301,7 +301,7 @@ groups:
                     type: prometheus
                     uid: PBFA97CFB590B2093
                 editorMode: code
-                expr: "sum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"(staging-dangers-service@docker|staging-grafana-monitoring@docker|staging-graphhopper@docker|staging-load-service-nginx@docker|staging-load-service@docker|staging-map-data@docker|staging-news-service@docker|staging-photon@docker|staging-prediction-monitor-nginx@docker|staging-predictor-nginx@docker|staging-privacy-policy@docker|staging-sg-selector-backend@docker|staging-sg-selector-nginx@docker|staging-shlink@docker|staging-tracking-service@docker|traffic-service@docker).*\",code=~\"2..\",protocol=\"http\"}[2m])\n)\n/ ignoring (code) group_left\nsum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"(staging-dangers-service@docker|staging-grafana-monitoring@docker|staging-graphhopper@docker|staging-load-service-nginx@docker|staging-load-service@docker|staging-map-data@docker|staging-news-service@docker|staging-photon@docker|staging-prediction-monitor-nginx@docker|staging-predictor-nginx@docker|staging-privacy-policy@docker|staging-sg-selector-backend@docker|staging-sg-selector-nginx@docker|staging-shlink@docker|staging-tracking-service@docker|traffic-service@docker).*\",protocol=\"http\"}[2m])\n)          "
+                expr: "sum by (service,method) (\n  rate(traefik_service_requests_total{code=~\"2..\",protocol=\"http\"}[2m])\n)\n/ ignoring (code) group_left\nsum by (service,method) (\n  rate(traefik_service_requests_total{protocol=\"http\"}[2m])\n)          "
                 instant: false
                 interval: ""
                 intervalMs: 60000
