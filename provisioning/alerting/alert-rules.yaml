@@ -282,7 +282,7 @@ groups:
           labels:
             "": ""
           isPaused: false
-    - orgId: 2
+    - orgId: 1
       name: System status
       folder: Critical Alerts (2m)
       interval: 2m
