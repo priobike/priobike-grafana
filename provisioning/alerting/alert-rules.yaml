@@ -1,0 +1,417 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: System status
+      folder: Critical Alerts (10m)
+      interval: 10m
+      rules:
+        - uid: f6d7b1a1-cdc1-4c5b-841f-c4a34d624e7d
+          title: MQTT Messages for Traffic Lights from SensorThings Broker
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                exemplar: false
+                expr: (increase(prediction_service_connection_observations_count_total{}[120s]) / 2) + (increase(prediction_service_cycle_time_observations_count_total{}[120s]) / 2)
+                instant: false
+                interval: ""
+                intervalMs: 60000
+                legendFormat: Phase Changes
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                settings:
+                    mode: replaceNN
+                    replaceWithValue: 0
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 3000
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: sdmbOcJnz
+          panelId: 8
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 10m
+          annotations:
+            __dashboardUid__: sdmbOcJnz
+            __panelId__: "8"
+            summary: Observation Outage
+          labels: {}
+          isPaused: false
+        - uid: d54b104b-32b5-49a3-bf68-3e4671bc44cb
+          title: Service status
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                exemplar: true
+                expr: 1 - service_is_up{} - (service_is_partially_running{} * 0.5)
+                interval: ""
+                intervalMs: 60000
+                legendFormat: '{{service}}'
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                settings:
+                    mode: replaceNN
+                    replaceWithValue: 1
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.9
+                            - 1.1
+                        type: within_range
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: sdmbOcJnz
+          panelId: 22
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 10m
+          annotations:
+            __dashboardUid__: sdmbOcJnz
+            __panelId__: "22"
+            summary: Service Outage
+          labels: {}
+          isPaused: false
+        - uid: fc6e3b66-65f5-4111-ad41-5de0eee97005
+          title: Node Status
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: builder
+                expr: node_active
+                interval: ""
+                intervalMs: 15000
+                legendFormat: '{{node}}'
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                settings:
+                    mode: replaceNN
+                    replaceWithValue: 0
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: sdmbOcJnz
+          panelId: 48
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 10m
+          annotations:
+            __dashboardUid__: sdmbOcJnz
+            __panelId__: "48"
+            description: ""
+            runbook_url: ""
+            summary: Node outage
+          labels:
+            "": ""
+          isPaused: false
+    - orgId: 1
+      name: System status
+      folder: Critical Alerts (2m)
+      interval: 2m
+      rules:
+        - uid: aa7bfb47-6bd1-442e-8159-53193e77c627
+          title: Erroneous service responses
+          condition: D
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 120
+                to: 0
+              datasourceUid: PBFA97CFB590B2093
+              model:
+                datasource:
+                    type: prometheus
+                    uid: PBFA97CFB590B2093
+                editorMode: code
+                expr: "sum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"(staging-dangers-service@docker|staging-grafana-monitoring@docker|staging-graphhopper@docker|staging-load-service-nginx@docker|staging-load-service@docker|staging-map-data@docker|staging-news-service@docker|staging-photon@docker|staging-prediction-monitor-nginx@docker|staging-predictor-nginx@docker|staging-privacy-policy@docker|staging-sg-selector-backend@docker|staging-sg-selector-nginx@docker|staging-shlink@docker|staging-tracking-service@docker|traffic-service@docker).*\",code=~\"2..\",protocol=\"http\"}[2m])\n)\n/ ignoring (code) group_left\nsum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"(staging-dangers-service@docker|staging-grafana-monitoring@docker|staging-graphhopper@docker|staging-load-service-nginx@docker|staging-load-service@docker|staging-map-data@docker|staging-news-service@docker|staging-photon@docker|staging-prediction-monitor-nginx@docker|staging-predictor-nginx@docker|staging-privacy-policy@docker|staging-sg-selector-backend@docker|staging-sg-selector-nginx@docker|staging-shlink@docker|staging-tracking-service@docker|traffic-service@docker).*\",protocol=\"http\"}[2m])\n)          "
+                instant: false
+                interval: ""
+                intervalMs: 60000
+                legendFormat: '{{method}} on {{service}}'
+                maxDataPoints: 43200
+                range: true
+                refId: A
+            - refId: B
+              relativeTimeRange:
+                from: 120
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: mean
+                refId: B
+                settings:
+                    mode: dropNN
+                type: reduce
+            - refId: C
+              relativeTimeRange:
+                from: 120
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: C
+                settings:
+                    mode: replaceNN
+                    replaceWithValue: 1
+                type: reduce
+            - refId: D
+              relativeTimeRange:
+                from: 120
+                to: 0
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0.8
+                            - 0
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params: []
+                      reducer:
+                        params: []
+                        type: avg
+                      type: query
+                datasource:
+                    name: Expression
+                    type: __expr__
+                    uid: __expr__
+                expression: C
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: D
+                type: threshold
+          dashboardUid: n5bu_kv45
+          panelId: 30
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 2m
+          annotations:
+            __dashboardUid__: n5bu_kv45
+            __panelId__: "30"
+            description: ""
+            runbook_url: ""
+            summary: Portion of 2xx responses too low
+          labels:
+            "": ""
+          isPaused: false
