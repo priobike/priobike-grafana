@@ -284,8 +284,8 @@ groups:
           isPaused: false
     - orgId: 1
       name: System status
-      folder: Critical Alerts (2m)
-      interval: 2m
+      folder: Critical Alerts (4m)
+      interval: 4m
       rules:
         - uid: aa7bfb47-6bd1-442e-8159-53193e77c627
           title: Erroneous service responses
@@ -293,7 +293,7 @@ groups:
           data:
             - refId: A
               relativeTimeRange:
-                from: 120
+                from: 240
                 to: 0
               datasourceUid: PBFA97CFB590B2093
               model:
@@ -311,7 +311,7 @@ groups:
                 refId: A
             - refId: B
               relativeTimeRange:
-                from: 120
+                from: 240
                 to: 0
               datasourceUid: __expr__
               model:
@@ -341,7 +341,7 @@ groups:
                 type: reduce
             - refId: C
               relativeTimeRange:
-                from: 120
+                from: 240
                 to: 0
               datasourceUid: __expr__
               model:
@@ -374,7 +374,7 @@ groups:
                 type: reduce
             - refId: D
               relativeTimeRange:
-                from: 120
+                from: 240
                 to: 0
               datasourceUid: __expr__
               model:
@@ -405,7 +405,7 @@ groups:
           panelId: 30
           noDataState: Alerting
           execErrState: Alerting
-          for: 2m
+          for: 4m
           annotations:
             __dashboardUid__: n5bu_kv45
             __panelId__: "30"
