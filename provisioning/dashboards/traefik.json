@@ -863,13 +863,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"$service.*\",code=~\"2..\",protocol=\"http\"}[2m])\n)\n/ ignoring (code) group_left\nsum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"$service.*\",protocol=\"http\"}[2m])\n)          ",
+          "expr": "sum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"$service.*\",code=~\"2..|3..\",protocol=\"http\"}[2m])\n)\n/ ignoring (code) group_left\nsum by (service,method) (\n  rate(traefik_service_requests_total{service=~\"$service.*\",protocol=\"http\"}[2m])\n)          ",
           "legendFormat": "{{method}} on {{service}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "2xx vs (!2xx+2xx) Ratio over 2m (Service: $service)",
+      "title": "2xx & 3xx Ratio over 2m (Service: $service)",
       "type": "timeseries"
     },
     {
