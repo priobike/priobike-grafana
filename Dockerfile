@@ -1,5 +1,5 @@
-FROM grafana/grafana:9.5.3
+FROM grafana/grafana:10.3.4
 
 COPY provisioning /etc/grafana/provisioning
 
-COPY data /var/lib/grafana
+COPY grafana.ini /etc/grafana/grafana.ini
