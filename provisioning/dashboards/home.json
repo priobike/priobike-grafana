@@ -1214,7 +1214,7 @@
           "refId": "A"
         }
       ],
-      "title": "Available Predictions / Connections",
+      "title": "Total Available Predictions / Connections",
       "type": "stat"
     },
     {
@@ -1286,8 +1286,117 @@
           "refId": "A"
         }
       ],
-      "title": "Things that received an observation in the last 10m",
+      "title": "Online Connections (Things that received an observation in the last 10m)",
       "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 8,
+        "y": 37
+      },
+      "id": 81,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.3.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "exemplar": true,
+          "expr": "(sum(prediction_service_udp_thing_status) / count(count by (thing_id) (prediction_service_udp_thing_status)))",
+          "interval": "",
+          "legendFormat": "Things receiving data",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editorMode": "code",
+          "expr": "(increase(prediction_service_predictions_count_total{}[120s]) / (2 * prediction_service_subscription_count_total{}))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Things having prediction",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Available Predictions / Online Connections",
+      "transformations": [],
+      "type": "timeseries"
     },
     {
       "cards": {},
@@ -1323,7 +1432,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 37
+        "y": 44
       },
       "heatmap": {},
       "hideZeroBuckets": false,
@@ -1428,7 +1537,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 45
+        "y": 52
       },
       "id": 26,
       "panels": [],
@@ -1470,7 +1579,7 @@
         "h": 12,
         "w": 8,
         "x": 0,
-        "y": 46
+        "y": 53
       },
       "id": 58,
       "options": {
@@ -1554,7 +1663,7 @@
         "h": 6,
         "w": 16,
         "x": 8,
-        "y": 46
+        "y": 53
       },
       "id": 59,
       "options": {
@@ -1623,7 +1732,7 @@
         "h": 6,
         "w": 2,
         "x": 8,
-        "y": 52
+        "y": 59
       },
       "id": 54,
       "options": {
@@ -1692,7 +1801,7 @@
         "h": 6,
         "w": 2,
         "x": 10,
-        "y": 52
+        "y": 59
       },
       "id": 72,
       "options": {
@@ -1756,7 +1865,7 @@
         "h": 6,
         "w": 2,
         "x": 12,
-        "y": 52
+        "y": 59
       },
       "id": 56,
       "options": {
@@ -1822,7 +1931,7 @@
         "h": 6,
         "w": 2,
         "x": 14,
-        "y": 52
+        "y": 59
       },
       "id": 73,
       "options": {
@@ -1885,7 +1994,7 @@
         "h": 6,
         "w": 2,
         "x": 16,
-        "y": 52
+        "y": 59
       },
       "id": 57,
       "options": {
@@ -1950,7 +2059,7 @@
         "h": 6,
         "w": 2,
         "x": 18,
-        "y": 52
+        "y": 59
       },
       "id": 74,
       "options": {
@@ -2013,7 +2122,7 @@
         "h": 6,
         "w": 2,
         "x": 20,
-        "y": 52
+        "y": 59
       },
       "id": 55,
       "options": {
@@ -2078,7 +2187,7 @@
         "h": 6,
         "w": 2,
         "x": 22,
-        "y": 52
+        "y": 59
       },
       "id": 71,
       "options": {
@@ -2121,7 +2230,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 58
+        "y": 65
       },
       "id": 77,
       "panels": [],
@@ -2175,8 +2284,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2192,7 +2300,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 59
+        "y": 66
       },
       "id": 78,
       "options": {
@@ -2282,8 +2390,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2300,7 +2407,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 59
+        "y": 66
       },
       "id": 79,
       "options": {
@@ -2337,7 +2444,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 67
+        "y": 74
       },
       "id": 68,
       "panels": [],
@@ -2396,8 +2503,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2429,7 +2535,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 68
+        "y": 75
       },
       "id": 69,
       "options": {
@@ -2498,8 +2604,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2515,7 +2620,7 @@
         "h": 8,
         "w": 16,
         "x": 8,
-        "y": 68
+        "y": 75
       },
       "id": 70,
       "options": {
@@ -2556,7 +2661,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 76
+        "y": 83
       },
       "id": 62,
       "panels": [
@@ -2682,7 +2787,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
@@ -2690,6 +2795,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 6,
+  "version": 9,
   "weekStart": ""
 }
