@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 14,
+  "id": 3,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1268,7 +1268,7 @@
           "expr": "sum(increase(battery_consumption_sum{save_battery=\"False\"}[1d])) / sum(increase(battery_consumption_count{save_battery=\"False\"}[1d]))",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Average battery consumption in %",
           "range": true,
           "refId": "A"
         }
@@ -1284,7 +1284,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-2d",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
