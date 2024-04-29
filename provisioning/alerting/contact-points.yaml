@@ -8,4 +8,5 @@ contactPoints:
           settings:
             addresses: priobike-alerts@groups.tu-dresden.de
             singleEmail: false
+            subject: '[PRODUCTION] {{ template "default.title" . }}'
           disableResolveMessage: false
