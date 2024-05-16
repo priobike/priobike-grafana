@@ -1449,18 +1449,15 @@
       },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           },
           "unitScale": true
         },
@@ -1474,22 +1471,38 @@
       },
       "id": 76,
       "options": {
-        "displayMode": "gradient",
-        "maxVizHeight": 300,
-        "minVizHeight": 10,
-        "minVizWidth": 0,
-        "namePlacement": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "RdYlBu",
+          "steps": 128
         },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": false,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
       "pluginVersion": "10.3.4",
       "targets": [
@@ -1508,7 +1521,7 @@
         }
       ],
       "title": "Deviation of Predictions in Seconds",
-      "type": "bargauge"
+      "type": "heatmap"
     },
     {
       "datasource": {
@@ -2594,6 +2607,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
