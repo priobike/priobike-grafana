@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 13,
+  "id": 5,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1509,57 +1509,21 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 48,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 4,
-            "pointSize": 6,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "continuous-RdYlGr"
           },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
+          "unit": "percent",
           "unitScale": true
         },
         "overrides": []
@@ -1572,17 +1536,22 @@
       },
       "id": 79,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
+      "pluginVersion": "10.3.4",
       "targets": [
         {
           "datasource": {
@@ -1590,7 +1559,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "(sum(prediction_service_udp_thing_status) / count(count by (thing_id) (prediction_service_udp_thing_status)))",
+          "expr": "(sum(prediction_service_udp_thing_status) / count(count by (thing_id) (prediction_service_udp_thing_status))) * 100",
           "hide": false,
           "instant": false,
           "legendFormat": "Things receiving data",
@@ -1603,7 +1572,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "code",
-          "expr": "(increase(prediction_service_predictions_count_total{}[120s]) / (2 * prediction_service_subscription_count_total{}))",
+          "expr": "(increase(prediction_service_predictions_count_total{}[120s]) / (2 * prediction_service_subscription_count_total{})) * 100",
           "instant": false,
           "legendFormat": "Things having prediction",
           "range": true,
@@ -1611,7 +1580,7 @@
         }
       ],
       "title": "Available Predictions / Online Connections",
-      "type": "timeseries"
+      "type": "stat"
     },
     {
       "datasource": {
@@ -1995,7 +1964,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange"
+                "color": "orange",
+                "value": null
               }
             ]
           },
@@ -2071,7 +2041,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange"
+                "color": "orange",
+                "value": null
               }
             ]
           },
@@ -2357,7 +2328,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-15m",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
@@ -2365,6 +2336,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 3,
+  "version": 2,
   "weekStart": ""
 }
