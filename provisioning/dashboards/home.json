@@ -105,7 +105,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(1 - avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[10m]))) * 100\n  * on(instance) group_left(node_id, node_name) node_meta\n",
+          "expr": "sum((1 - avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[10m]))) * 100\n  * on(instance) group_left(node_id, node_name) node_meta)by (node_id, node_name)\n",
           "hide": false,
           "instant": false,
           "legendFormat": "{{node_name}}",
@@ -183,7 +183,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(\n  ((node_filesystem_avail_bytes{mountpoint=\"/\"} * on(instance) group_left(node_id, node_name) node_meta)) / 1000000000\n)",
+          "expr": "(\n  (sum(node_filesystem_avail_bytes{mountpoint=\"/\"} * on(instance) group_left(node_id, node_name) node_meta)by (node_id, node_name)) / 1000000000\n)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{node_name}} {{mountpoint}}",
@@ -657,8 +657,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -789,8 +788,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "blue",
-                "value": null
+                "color": "blue"
               }
             ]
           },
@@ -912,8 +910,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -987,8 +984,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1048,8 +1044,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1115,8 +1110,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1312,8 +1306,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1376,8 +1369,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1444,8 +1436,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1518,8 +1509,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1731,8 +1721,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1807,8 +1796,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange",
-                "value": null
+                "color": "orange"
               }
             ]
           },
@@ -1899,8 +1887,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1964,8 +1951,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange",
-                "value": null
+                "color": "orange"
               }
             ]
           },
@@ -2041,8 +2027,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "orange",
-                "value": null
+                "color": "orange"
               }
             ]
           },
@@ -2122,8 +2107,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2202,8 +2186,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -2326,8 +2309,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2502,7 +2484,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
@@ -2510,6 +2492,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 3,
+  "version": 5,
   "weekStart": ""
 }
