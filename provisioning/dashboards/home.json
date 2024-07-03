@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 5,
+  "id": 10,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -105,7 +105,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum((1 - avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[10m]))) * 100\n  * on(instance) group_left(node_id, node_name) node_meta)by (node_id, node_name)\n",
+          "expr": "avg((1 - avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[10m]))) * 100\n  * on(instance) group_left(node_id, node_name) node_meta)by (node_id, node_name)\n",
           "hide": false,
           "instant": false,
           "legendFormat": "{{node_name}}",
@@ -183,7 +183,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(\n  (sum(node_filesystem_avail_bytes{mountpoint=\"/\"} * on(instance) group_left(node_id, node_name) node_meta)by (node_id, node_name)) / 1000000000\n)",
+          "expr": "(\n  (avg(node_filesystem_avail_bytes{mountpoint=\"/\"} * on(instance) group_left(node_id, node_name) node_meta)by (node_id, node_name)) / 1000000000\n)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{node_name}} {{mountpoint}}",
@@ -257,7 +257,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "(sum(node_memory_MemFree_bytes * on(instance) group_left(node_id, node_name) node_meta) by (node_id, node_name)) / 1000000000",
+          "expr": "(avg(node_memory_MemFree_bytes * on(instance) group_left(node_id, node_name) node_meta) by (node_id, node_name)) / 1000000000",
           "instant": false,
           "legendFormat": "{{node_name}}",
           "range": true,
@@ -657,7 +657,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2492,6 +2493,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 5,
+  "version": 2,
   "weekStart": ""
 }
