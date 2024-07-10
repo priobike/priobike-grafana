@@ -20,8 +20,6 @@ As long as not overwritten by env variables:
 User: `admin`
 Password: `admin`
 
-Note that data will not be available locally.
-
 These are the build arguments we use to configure the grafana build:
 - `GF_SECURITY_ADMIN_USER`
 - `GF_SECURITY_ADMIN_PASSWORD`
@@ -38,6 +36,9 @@ These are the build arguments we use to configure the grafana build:
 - `GF_SMTP_FROM_NAME`
 
 For more information see: [Configure Grafana](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/)
+
+Note that data will not be available locally.
+
 
 ## Contributing
 
