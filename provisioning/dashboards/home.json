@@ -1611,7 +1611,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "builder",
-          "expr": "{service=\"staging_staging-prediction-service\"} |= ``",
+          "expr": "{service=\"production_prediction-service\"} |= ``",
           "maxLines": 5000,
           "queryType": "range",
           "refId": "A"
@@ -2166,8 +2166,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -2342,7 +2341,7 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timeRangeUpdatedDuringEditOrView": false,
@@ -2350,6 +2349,6 @@
   "timezone": "",
   "title": "Priobike",
   "uid": "sdmbOcJnz",
-  "version": 24,
+  "version": 26,
   "weekStart": ""
 }
