@@ -1611,7 +1611,7 @@
             "uid": "P8E80F9AEF21F6940"
           },
           "editorMode": "builder",
-          "expr": "{service=\"staging_staging-prediction-service\"} |= ``",
+          "expr": "{service=\"production_prediction-service\"} |= ``",
           "maxLines": 5000,
           "queryType": "range",
           "refId": "A"
